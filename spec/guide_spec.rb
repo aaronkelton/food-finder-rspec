@@ -4,64 +4,68 @@ describe Guide do
 
   let(:test_file) { 'spec/fixtures/restaurants_test.txt' }
   subject { Guide.new(test_file) }
-  
+
   let(:new_file)  { 'spec/fixtures/new_restaurants_test.txt' }
   let(:new_file_path) { File.join(APP_ROOT, new_file) }
   let(:blank_guide) { Guide.new(new_file) }
-  
+
+  it "is available as described_class" do
+    expect(described_class).to(eq(Guide))
+  end
+
   it 'includes NumberHelper and #number_to_currency' do
     expect(described_class.included_modules).to include(NumberHelper)
     expect(subject).to respond_to(:number_to_currency)
   end
-  
+
   describe '#intialize' do
-    
+
     it 'calls Restaurant#load_file with its path argument' do
       skip('Needs expectation')
       Guide.new(test_file)
       # expect ...
     end
-    
+
   end
-  
+
   describe '#launch!' do
-    
+
     it 'outputs a introductory message' do
       skip('Needs expectation')
       setup_fake_input('quit')
       # expect ...
     end
-    
+
   end
 
   describe 'performing actions' do
-    
+
     context 'with invalid action' do
-      
+
       it 'outputs list of valid actions' do
         skip('Needs expectation')
         setup_fake_input('invalid action', 'quit')
         # expect ...
       end
-      
+
     end
-    
+
     context 'with quit action' do
-      
+
       it 'outputs concluding message and exits' do
         skip('Needs expectation')
         setup_fake_input('quit')
         # expect ...
       end
-      
+
     end
 
     context 'with list action' do
-      
+
       it 'outputs a formatted list of restaurants' do
         setup_fake_input('list', 'quit')
         output = capture_output { subject.launch! }
-        
+
         lines = output.split("\n")
         expect(lines[10]).to match(/^\sName\s{27}Cuisine\s{15}Price$/)
         expect(lines[11]).to eq("-" * 60)
@@ -70,7 +74,7 @@ describe Guide do
         end
         expect(lines[18]).to eq("-" * 60)
       end
-      
+
       it 'outputs a message if no listings are found' do
         skip("Needs expectation")
         setup_fake_input('list', 'quit')
@@ -80,11 +84,11 @@ describe Guide do
         expect(lines[11]).to eq("-" * 60)
         # expect(lines[12]).to ...
         expect(lines[13]).to eq("-" * 60)
-        
+
         # clean up
         remove_created_file(new_file_path)
       end
-      
+
       it 'sorts alphabetically by default' do
         skip('Needs expectation')
         setup_fake_input('list', 'quit')
@@ -96,7 +100,7 @@ describe Guide do
         first_chars = names.map {|l| l[0] }
         # expect(first_chars).to ...
       end
-      
+
       it 'sorts alphabetically with an invalid sort by' do
         skip('Needs expectation')
         setup_fake_input('list invalid', 'quit')
@@ -135,23 +139,23 @@ describe Guide do
         end
         # expect(cuisines).to ...
       end
-      
+
     end
 
     context 'with find action' do
-      
+
       it 'outputs instructions if no arguments given' do
         skip('Needs expectation')
         setup_fake_input('find', 'quit')
         output = capture_output { subject.launch! }
         # expect(output).to ...
       end
-      
+
       it 'finds restaurants with matching name keyword' do
         skip('Needs expectation')
         setup_fake_input('find cafe', 'quit')
         output = capture_output { subject.launch! }
-        
+
         lines = output.split("\n")
         expect(lines[11]).to eq("-" * 60)
         # expect(lines[12]).to ...
@@ -162,18 +166,18 @@ describe Guide do
         skip('Needs expectation')
         setup_fake_input('find mexican', 'quit')
         output = capture_output { subject.launch! }
-        
+
         lines = output.split("\n")
         expect(lines[11]).to eq("-" * 60)
         # expect(lines[12]).to ...
         expect(lines[13]).to eq("-" * 60)
       end
-      
+
       it 'finds restaurants with prices less than keyword' do
         skip('Needs expectation')
         setup_fake_input('find 10', 'quit')
         output = capture_output { subject.launch! }
-        
+
         lines = output.split("\n")
         expect(lines[11]).to eq("-" * 60)
         # expect(lines[12]).to ...
@@ -189,14 +193,14 @@ describe Guide do
       let(:fake_file) do
         double('Fake Restaurant Instance', :save => true)
       end
-      
+
       before(:example) do
         # keeps it from creating a new file
         allow(Restaurant).to receive(:new).with(any_args).
           and_return(fake_file)
         setup_fake_input('add', 'Chelsea Diner', 'American', '20', 'quit')
       end
-      
+
       it 'asks questions about restaurant to add' do
         # Questions:
         # "Restaurant name: "   :name
@@ -216,7 +220,7 @@ describe Guide do
       end
 
     end
-    
+
   end
 
 end
