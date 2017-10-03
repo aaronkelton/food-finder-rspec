@@ -2,11 +2,11 @@ class RestaurantFile
 
   @@delimiter = "\t"
   @@line_map = [:name, :cuisine, :price]
-  
+
   def initialize(options={})
     self.filepath = options[:filepath]
   end
-  
+
   def filepath=(path=nil)
     return if path.nil?
     @filepath = File.join(APP_ROOT, path)
@@ -18,7 +18,7 @@ class RestaurantFile
   def exists?
     @filepath && File.exists?(@filepath)
   end
-  
+
   def readable?
     @filepath && File.readable?(@filepath)
   end
@@ -42,7 +42,7 @@ class RestaurantFile
     end
     return restaurants
   end
-  
+
   def append(restaurant)
     return false unless writable?
     File.open(@filepath, 'a') do |file|
@@ -51,9 +51,9 @@ class RestaurantFile
     end
     return true
   end
-  
+
   private
-  
+
     def create_save_file
       File.open(@filepath, 'w')
     end
