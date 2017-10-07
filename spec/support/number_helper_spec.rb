@@ -20,7 +20,9 @@ describe 'NumberHelper' do
         expect(number_to_currency("1")).to(eq("$1.00"))
       end
 
-      it "uses delimiters for very large numbers"
+      it "uses delimiters for very large numbers" do
+        expect(number_to_currency(9999999)).to(eq("$9,999,999.00"))
+      end
 
       it "does not have delimiters for small numbers"
 
