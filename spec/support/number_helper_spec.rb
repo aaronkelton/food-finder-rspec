@@ -32,7 +32,9 @@ describe 'NumberHelper' do
 
     context 'using custom options' do
 
-      it 'allows changing the :unit'
+      it 'allows changing the :unit' do
+        expect(number_to_currency(1, {unit: '£'})).to(eq("£1.00"))
+      end
 
       it 'allows changing the :precision'
 
