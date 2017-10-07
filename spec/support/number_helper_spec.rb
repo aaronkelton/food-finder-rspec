@@ -16,7 +16,9 @@ describe 'NumberHelper' do
         expect(number_to_currency(1.0)).to(eq("$1.00"))
       end
 
-      it "correctly formats a string"
+      it "correctly formats a string" do
+        expect(number_to_currency("1")).to(eq("$1.00"))
+      end
 
       it "uses delimiters for very large numbers"
 
