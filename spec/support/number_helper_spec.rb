@@ -52,7 +52,9 @@ describe 'NumberHelper' do
         expect(number_to_currency(1, {separator: ','})).to(eq("$1,00"))
       end
 
-      it 'correctly formats using multiple options'
+      it 'correctly formats using multiple options' do
+        expect(number_to_currency(9999999, {unit: '@', precision: 4, delimiter: '_', separator: '/'})).to(eq("@9_999_999/0000"))
+      end
 
     end
 
