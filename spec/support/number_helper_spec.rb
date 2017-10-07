@@ -36,7 +36,9 @@ describe 'NumberHelper' do
         expect(number_to_currency(1, {unit: '£'})).to(eq("£1.00"))
       end
 
-      it 'allows changing the :precision'
+      it 'allows changing the :precision' do
+        expect(number_to_currency(1, {precision: 5})).to(eq("$1.00000"))
+      end
 
       it 'omits the separator if :precision is 0'
 
