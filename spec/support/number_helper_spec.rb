@@ -8,7 +8,9 @@ describe 'NumberHelper' do
 
     context 'using default values' do
 
-      it "correctly formats an integer"
+      it "correctly formats an integer" do
+        expect(number_to_currency(1)).to(eq("$1.00"))
+      end
 
       it "correctly formats a float"
 
