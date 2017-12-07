@@ -5,7 +5,7 @@ class Restaurant
   attr_accessor :name, :cuisine, :price
   
   @@file = nil
-  def self.file
+  def self.file # no need to write a test for self.file
     @@file
   end
   
@@ -15,9 +15,11 @@ class Restaurant
     unless @@file.usable?
       puts "Restaurant file is not usable.\n\n"
       @@file = nil
-    end
+    end# no need to write a test for self.load_file
   end
   
+  # write tests for all methods below
+
   def self.all
     !@@file.nil? ? @@file.read : []
   end
